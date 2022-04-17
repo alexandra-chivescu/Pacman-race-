@@ -42,7 +42,7 @@ void mouse(int button, int state, int mx, int my)
 	if (button == GLUT_LEFT_BUTTON && state == GLUT_DOWN)
 	{
 		x = mx;
-		y = 600 - my;
+		y = my;
 	}
 
 }
@@ -112,7 +112,6 @@ void startgame(void)
 			timp_food += 0.1;
 			pct += 1000;
 		}
-
 		glutPostRedisplay();
 	}
 }
@@ -172,11 +171,19 @@ void drawScene(void)
 
 		glColor3f(0, 0, 0);
 
+		//titlu
 		glColor3f(1.0f, 1.0f, 1.0f);
 		char titleGame[100] = { 0 };
-		sprintf_s(titleGame, "Pacman race - stay away from ghosts and eat proteins for a high score");
-		renderbitmap(-40, 400, GLUT_BITMAP_TIMES_ROMAN_24, titleGame);
+		sprintf_s(titleGame, "Pacman Race");
+		renderbitmap(200, 400, GLUT_BITMAP_TIMES_ROMAN_24, titleGame);
 
+		//Game rules
+		glColor3f(1.0f, 1.0f, 1.0f);
+		char rulesGame[100] = { 0 };
+		sprintf_s(rulesGame, "GAME RULES: 1.Stay away from ghosts and 2.Eat proteins for a high score");
+		renderbitmap(-80, 300, GLUT_BITMAP_TIMES_ROMAN_24, rulesGame);
+
+		//Buton Play
 		glColor3f(0.1, 0.6, 0.1);
 		glRecti(235, 185, 310, 230);
 		glColor3f(0.0f, 0.0f, 0.0f);
@@ -184,6 +191,7 @@ void drawScene(void)
 		sprintf_s(bufPlayGame, "Play");
 		renderbitmap(250, 200, GLUT_BITMAP_TIMES_ROMAN_24, bufPlayGame);
 
+		//buton Exit 
 		glColor3f(1, 0.2, 0.3);
 		glRecti(235, 85, 310, 130);
 		glColor3f(0.0f, 0.0f, 0.0f);
@@ -192,16 +200,16 @@ void drawScene(void)
 		renderbitmap(250, 100, GLUT_BITMAP_TIMES_ROMAN_24, bufExitGame);
 
 		//daca userul face click pe play, se incepe jocul (screen = 2)
-		if (x >= 235 && x <= 310 && y >= 185 && y >= 230)
+		if (x >= 335 && x <= 410 && y >= 275 && y <= 230)
 		{
 			screen = 2;
 		}
 		//daca userul face click pe exit, se inchide fereastra
-		if (x >= 235 && x <= 310 && y >= 85 && y >= 130)
+		if (x >= 335 && x <= 410 && y >= 375 && y <= 330)
 		{
 			glutDestroyWindow(window);
 		}
-		
+
 		glFlush();
 	}
 	//in joc
@@ -227,7 +235,6 @@ void drawScene(void)
 		glVertex2i(700, 460); // Dreapta sus
 		glVertex2i(-100, 460);// Stanga sus
 		glEnd();
-		RenderString(80.0f, 425.0f, GLUT_BITMAP_TIMES_ROMAN_24, (const unsigned char*)"Stay away from ghosts and eat your proteins!");
 
 		// Delimitare sosea
 		glLineWidth(15);
